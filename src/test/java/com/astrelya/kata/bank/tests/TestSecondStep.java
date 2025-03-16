@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import com.astrelya.kata.bank.impl.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,8 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import com.astrelya.kata.bank.IBank;
 import com.astrelya.kata.bank.IClient;
-import com.astrelya.kata.bank.impl.Client;
-import com.astrelya.kata.bank.impl.KataBank;
 
 public class TestSecondStep {
 	
@@ -40,7 +39,7 @@ public class TestSecondStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("LivretA",1000.0);
+		client.addProduct(new LivretAStrategyI(),1000.0);
 		assertEquals(0, BigDecimal.valueOf(0.625).compareTo(client.getMonthlyBalance()));
 		
 	}
@@ -54,7 +53,7 @@ public class TestSecondStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("LDD",2100.0);
+		client.addProduct(new LDDStrategyI(),2100.0);
 		assertEquals(0,BigDecimal.valueOf(1.75).compareTo(client.getMonthlyBalance()));
 		
 	}
@@ -68,7 +67,7 @@ public class TestSecondStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("CompteAVue",3000.0);
+		client.addProduct(new CompteAVueStrategyI(),3000.0);
 		assertEquals(0,BigDecimal.valueOf(1.25).compareTo(client.getMonthlyBalance()));
 		
 	}
@@ -84,8 +83,8 @@ public class TestSecondStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("LDD",3000.0);
-		client.addProduct("LDD",5000.0);
+		client.addProduct(new LDDStrategyI(),3000.0);
+		client.addProduct(new LDDStrategyI(),5000.0);
 		
 	}
 	
@@ -100,8 +99,8 @@ public class TestSecondStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("LivretA",3000.0);
-		client.addProduct("LivretA",6000.0);
+		client.addProduct(new LivretAStrategyI(),3000.0);
+		client.addProduct(new LivretAStrategyI(),6000.0);
 		
 	}
 	
@@ -116,8 +115,8 @@ public class TestSecondStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("CompteAVue",3000.0);
-		client.addProduct("CompteAVue",1000.0);
+		client.addProduct(new CompteAVueStrategyI(),3000.0);
+		client.addProduct(new CompteAVueStrategyI(),1000.0);
 		
 	}
 }

@@ -2,14 +2,17 @@ package com.astrelya.kata.bank.impl;
 
 import java.math.BigDecimal;
 
+import com.astrelya.kata.bank.IProduct;
 import org.apache.commons.lang3.NotImplementedException;
 
-public class CompteAVue {
+public class CompteAVue implements IProduct {
 
 	private Double rate;
 	private Double amount;
+	public static String TYPE= "CompteAVue";
 	
 	public CompteAVue(Double amount) {
+		this.rate = 0.5;
 		this.amount = amount;
 	}
 	
@@ -22,6 +25,11 @@ public class CompteAVue {
 	}
 	
 	public BigDecimal getMonthlyValue() {
-		throw new NotImplementedException();
+		return BigDecimal.valueOf(amount * (rate/100) / 12);
+	}
+
+	@Override
+	public String getType() {
+		return TYPE;
 	}
 }

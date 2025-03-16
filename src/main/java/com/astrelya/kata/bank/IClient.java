@@ -7,9 +7,9 @@ public interface IClient {
 
 	public String getEmail();
 	
-	public Collection<Object> getProductList();
+	public Collection<IProduct> getProductList();
 	
 	public BigDecimal getMonthlyBalance();
 	
-	public void addProduct(String productType,Double amount);
+	public void addProduct(IProductStrategy strategy, Double amount);
 }

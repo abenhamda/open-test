@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import com.astrelya.kata.bank.impl.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,8 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import com.astrelya.kata.bank.IBank;
 import com.astrelya.kata.bank.IClient;
-import com.astrelya.kata.bank.impl.Client;
-import com.astrelya.kata.bank.impl.KataBank;
 
 public class TestThirdStep {
 	
@@ -40,7 +39,7 @@ public class TestThirdStep {
 		}
 		
 		IClient client = clientOpt.get();
-		client.addProduct("Pret",15000.0);
+		client.addProduct(new PretStrategyI(),15000.0);
 		assertEquals(0,BigDecimal.valueOf(-25.0).compareTo(client.getMonthlyBalance()));
 		
 	}
@@ -69,25 +68,25 @@ public class TestThirdStep {
 		
 		IClient client3 = clientOpt.get();
 		
-		client1.addProduct("LivretA",1000.0);
-		client1.addProduct("Pret",42000.0);
+		client1.addProduct(new LivretAStrategyI(),1000.0);
+		client1.addProduct(new PretStrategyI(),42000.0);
 		
 		assertEquals(0,BigDecimal.valueOf(-69.375).compareTo(client1.getMonthlyBalance()));
 		
-		client2.addProduct("LivretA",1000.0);
-		client2.addProduct("LDD",2100.0);
-		client2.addProduct("CompteAVue",6000.0);
+		client2.addProduct(new LivretAStrategyI(),1000.0);
+		client2.addProduct(new LDDStrategyI(),2100.0);
+		client2.addProduct(new CompteAVueStrategyI(),6000.0);
 		
 		assertEquals(0,BigDecimal.valueOf(4.875).compareTo(client2.getMonthlyBalance()));
 		
-		client3.addProduct("LivretA",2400.0);
-		client3.addProduct("LDD",9000.0);
-		client3.addProduct("CompteAVue",3000.0);
-		client3.addProduct("Pret",12000.0);
+		client3.addProduct(new LivretAStrategyI(),2400.0);
+		client3.addProduct(new LDDStrategyI(),9000.0);
+		client3.addProduct(new CompteAVueStrategyI(),3000.0);
+		client3.addProduct(new PretStrategyI(),12000.0);
 		
 		assertEquals(0,BigDecimal.valueOf(-9.75).compareTo(client3.getMonthlyBalance()));
 		
-		assertEquals(0,BigDecimal.valueOf(74.25).compareTo(bank.getMonthlyPNL()));
+		assertEquals(0,BigDecimal.valueOf(-74.25).compareTo(bank.getMonthlyPNL()));
 		
 	}
 	

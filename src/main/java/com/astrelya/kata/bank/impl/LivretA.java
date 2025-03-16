@@ -1,17 +1,18 @@
 package com.astrelya.kata.bank.impl;
 
+import com.astrelya.kata.bank.IProduct;
+
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.NotImplementedException;
 
-
-
-public class LivretA {
+public class LivretA implements IProduct {
 
 	private Double rate;
 	private Double amount;
+	public static String TYPE= "LivretA";
 	
 	public LivretA(Double amount) {
+		this.rate = 0.75;
 		this.amount = amount;
 	}
 	
@@ -24,6 +25,11 @@ public class LivretA {
 	}
 	
 	public BigDecimal getMonthlyValue() {
-		throw new NotImplementedException();
+		return BigDecimal.valueOf(amount * (rate/100) / 12);
+	}
+
+	@Override
+	public String getType() {
+		return TYPE;
 	}
 }
